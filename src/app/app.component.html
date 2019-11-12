@@ -1,0 +1,49 @@
+<div class="ui container">
+  <h2 class="ui center aligned icon header">
+    <hr>
+      Productos-Aliaga
+  </h2>
+  <div class="ui centered grid" style="margin-bottom: 5px; margin-top: 5px">
+    <div class="ui segment nine wide column form">
+      <div class="field">
+        <label>Descripción</label>
+        <input type="text" name="descripcion" placeholder="Descripción del producto" [(ngModel)]="prod.descripcion">
+      </div>
+      <div class="field">
+        <label>Precio</label>
+        <input type="text" name="precio" placeholder="Precio del producto" [(ngModel)]="prod.precio">
+      </div>
+      <button class="ui green button" (click)="nuevo()">Agregar</button>
+      <button class="ui button" (click)="actualizar()">Modificar</button>
+    </div>
+  </div>
+  <table class="ui celled table center aligned" *ngIf="hayRegistros(); else sinproductos">
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Descripción</th>
+        <th>Precio</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let producto of lista">
+        <td data-label="Código">{{producto._id}}</td>
+        <td data-label="Descripción">{{producto.descripcion}}</td>
+        <td data-label="Precio">{{producto.precio}} soles</td>
+        <td>
+          <div class="ui buttons">
+            <button class="ui yellow button" (click)="mostrar(producto._id)">Editar</button>
+            <div class="or"></div>
+            <button class="ui red button" (click)="eliminar(producto._id)">Borrar</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ng-template #sinproductos>
+    <div class="ui centered grid">
+      <div class="ui yellow message">No se encontraron registros</div>
+    </div>
+  </ng-template>
+</div>
